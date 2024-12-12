@@ -1,5 +1,7 @@
 export * from "./AutoImage"
+// export * from "./Button_ignite"
 export * from "./Button"
+export * from "./Typography"
 export * from "./Card"
 export * from "./Header"
 export * from "./Icon"
