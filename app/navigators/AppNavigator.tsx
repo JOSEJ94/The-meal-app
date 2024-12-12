@@ -12,6 +12,8 @@ import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useAppTheme, useThemeProvider } from "@/utils/useAppTheme"
 import { ComponentProps } from "react"
+import { translate } from "@/i18n"
+import { View } from "react-native"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -27,8 +29,8 @@ import { ComponentProps } from "react"
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Welcome: undefined
   GetStarted: undefined
+  DishDetails: undefined
 }
 
 /**
@@ -53,8 +55,8 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: true,
-        headerTitle: "FOODNATOR",
+        headerBackTitle: translate("common:back"),
+        headerTitle: translate("common:headerTitle"),
         headerTintColor: colors.palette.neutral100,
         navigationBarColor: colors.background,
         headerStyle: {
@@ -66,7 +68,7 @@ const AppStack = observer(function AppStack() {
       }}
     >
       <Stack.Screen name="GetStarted" component={Screens.GetStartedScreen} />
-      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+      <Stack.Screen name="DishDetails" component={() => <View />} />
     </Stack.Navigator>
   )
 })

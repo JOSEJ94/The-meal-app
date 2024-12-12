@@ -5,6 +5,11 @@ const es: Translations = {
     ok: "OK",
     cancel: "Cancelar",
     back: "Volver",
+    headerTitle: "Foodnator",
+  },
+  getStartedScreen: {
+    title: "Tienes hambre?",
+    cta: "Dame un platillo!",
   },
   welcomeScreen: {
     postscript:

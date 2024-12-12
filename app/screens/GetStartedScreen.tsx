@@ -4,23 +4,27 @@ import { observer } from "mobx-react-lite"
 import { Button, Screen, Typography } from "@/components"
 import { ThemedStyle } from "@/theme"
 import { useAppTheme } from "@/utils/useAppTheme"
+import { useNavigation } from "@react-navigation/native"
+import { NativeStackNavigationProp } from "@react-navigation/native-stack"
+import { AppStackParamList } from "@/navigators"
 
 export const GetStartedScreen = observer(() => {
+  const navigation = useNavigation<NativeStackNavigationProp<AppStackParamList>>()
   const { themed } = useAppTheme()
 
   const onGetMealPressed = () => {
-    console.log("Press")
+    navigation.navigate("DishDetails")
   }
 
   return (
     <Screen preset="fixed" contentContainerStyle={themed($containerViewStyle)}>
-      <Typography style={themed($questionTextStyle)}>Are you hungry?</Typography>
-      <Button onPress={onGetMealPressed} text="Get me a meal!" hitSlop={10} />
+      <Typography style={themed($questionTextStyle)} tx="getStartedScreen:title" />
+      <Button onPress={onGetMealPressed} tx="getStartedScreen:cta" hitSlop={10} />
     </Screen>
   )
 })
 
-const $containerViewStyle: ThemedStyle<ViewStyle> = ({ colors }) => ({
+const $containerViewStyle: ThemedStyle<ViewStyle> = ({}) => ({
   justifyContent: "center",
   alignItems: "center",
   flex: 1,
