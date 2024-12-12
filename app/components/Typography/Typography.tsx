@@ -27,10 +27,10 @@ interface TypographyProps extends TextProps {
    */
 }
 
-export const Typography = ({ children, tx, txOptions, ...rest }: TypographyProps) => {
+export const Typography = ({ children, text, tx, txOptions, ...rest }: TypographyProps) => {
   const { themed } = useAppTheme()
   const i18nText = tx && translate(tx, txOptions)
-  const content = i18nText || children
+  const content = i18nText || text || children
 
   return <Text {...rest}>{content}</Text>
 }

@@ -52,6 +52,7 @@ export const Button = ({
 
   return (
     <TouchableHighlight
+      accessibilityRole="button"
       style={[themed($baseViewStyle), style]}
       hitSlop={theme.spacing.xs}
       {...rest}
