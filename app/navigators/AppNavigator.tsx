@@ -12,6 +12,8 @@ import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useAppTheme, useThemeProvider } from "@/utils/useAppTheme"
 import { ComponentProps } from "react"
+import { translate } from "@/i18n"
+import { View } from "react-native"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -27,9 +29,8 @@ import { ComponentProps } from "react"
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Welcome: undefined
-  // 🔥 Your screens go here
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  GetStarted: undefined
+  DishDetails: undefined
 }
 
 /**
@@ -54,16 +55,19 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
-        navigationBarColor: colors.background,
+        headerBackTitle: translate("common:back"),
+        headerTitle: translate("common:headerTitle"),
+        headerTintColor: colors.palette.neutral100,
+        headerStyle: {
+          backgroundColor: colors.tint,
+        },
         contentStyle: {
           backgroundColor: colors.background,
         },
       }}
     >
-      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
-      {/** 🔥 Your screens go here */}
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="GetStarted" component={Screens.GetStartedScreen} />
+      <Stack.Screen name="DishDetails" component={() => <View />} />
     </Stack.Navigator>
   )
 })

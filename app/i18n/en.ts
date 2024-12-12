@@ -3,6 +3,11 @@ const en = {
     ok: "OK!",
     cancel: "Cancel",
     back: "Back",
+    headerTitle: "FOODNATOR",
+  },
+  getStartedScreen: {
+    title: "Are you hungry?",
+    cta: "Get me a meal!",
   },
   welcomeScreen: {
     postscript:

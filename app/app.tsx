@@ -42,16 +42,7 @@ const config = {
       path: "",
     },
     Welcome: "welcome",
-    Demo: {
-      screens: {
-        DemoShowroom: {
-          path: "showroom/:queryIndex?/:itemIndex?",
-        },
-        DemoDebug: "debug",
-        DemoPodcastList: "podcast",
-        DemoCommunity: "community",
-      },
-    },
+    GetStarted: "getstarted",
   },
 }
 
