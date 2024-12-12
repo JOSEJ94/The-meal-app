@@ -28,8 +28,7 @@ import { ComponentProps } from "react"
  */
 export type AppStackParamList = {
   Welcome: undefined
-  // 🔥 Your screens go here
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  GetStarted: undefined
 }
 
 /**
@@ -54,16 +53,16 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        headerTitle: "FOODNATOR",
         navigationBarColor: colors.background,
         contentStyle: {
           backgroundColor: colors.background,
         },
       }}
     >
+      <Stack.Screen name="GetStarted" component={Screens.GetStartedScreen} />
       <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
-      {/** 🔥 Your screens go here */}
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })
