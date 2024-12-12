@@ -58,7 +58,6 @@ const AppStack = observer(function AppStack() {
         headerBackTitle: translate("common:back"),
         headerTitle: translate("common:headerTitle"),
         headerTintColor: colors.palette.neutral100,
-        navigationBarColor: colors.background,
         headerStyle: {
           backgroundColor: colors.tint,
         },

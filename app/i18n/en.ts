@@ -3,7 +3,7 @@ const en = {
     ok: "OK!",
     cancel: "Cancel",
     back: "Back",
-    headerTitle: "Foodnator",
+    headerTitle: "FOODNATOR",
   },
   getStartedScreen: {
     title: "Are you hungry?",

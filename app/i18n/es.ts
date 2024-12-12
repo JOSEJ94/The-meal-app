@@ -5,7 +5,7 @@ const es: Translations = {
     ok: "OK",
     cancel: "Cancelar",
     back: "Volver",
-    headerTitle: "Foodnator",
+    headerTitle: "FOOTNATOR",
   },
   getStartedScreen: {
     title: "Tienes hambre?",
