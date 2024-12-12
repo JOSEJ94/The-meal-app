@@ -55,7 +55,11 @@ const AppStack = observer(function AppStack() {
       screenOptions={{
         headerShown: true,
         headerTitle: "FOODNATOR",
+        headerTintColor: colors.palette.neutral100,
         navigationBarColor: colors.background,
+        headerStyle: {
+          backgroundColor: colors.tint,
+        },
         contentStyle: {
           backgroundColor: colors.background,
         },

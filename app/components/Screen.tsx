@@ -261,11 +261,7 @@ export function Screen(props: ScreenProps) {
         $containerInsets,
       ]}
     >
-      <StatusBar
-        style={statusBarStyle || (themeContext === "dark" ? "light" : "dark")}
-        {...StatusBarProps}
-      />
-
+      <StatusBar style={statusBarStyle || "light"} {...StatusBarProps} />
       <KeyboardAvoidingView
         behavior={isIos ? "padding" : "height"}
         keyboardVerticalOffset={keyboardOffset}
