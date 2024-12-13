@@ -68,11 +68,13 @@ export const DishDetailScreen = observer(() => {
         tx="dishDetailScreen:instructionsTitle"
         style={themed($instructionsTitleStyle)}
       />
-      <Button
-        variant={ButtonVariant.SECONDARY}
-        tx="dishDetailScreen:openVideo"
-        onPress={onOpenVideoPress}
-      />
+      {Boolean(dish.strYoutube) && (
+        <Button
+          variant={ButtonVariant.SECONDARY}
+          tx="dishDetailScreen:openVideo"
+          onPress={onOpenVideoPress}
+        />
+      )}
       <Typography style={themed($instructionsStyle)}>{dish?.strInstructions}</Typography>
     </>
   )
