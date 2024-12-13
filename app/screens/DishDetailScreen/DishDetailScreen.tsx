@@ -124,7 +124,7 @@ export const DishDetailScreen = observer(() => {
       <IconButton
         onPress={refreshDish}
         disabled={loading || isRefreshing}
-        style={{ top: 220, right: 20, position: "absolute" }}
+        style={styles.refreshPortraitButton}
       >
         <AnimatedRefreshIcon loading={isRefreshing} />
       </IconButton>
@@ -136,7 +136,7 @@ export const DishDetailScreen = observer(() => {
       <IconButton
         onPress={refreshDish}
         disabled={loading || isRefreshing}
-        style={{ left: 10 + insets.left / 2, bottom: 15, position: "absolute" }}
+        style={styles.refreshLandscapeButton}
       >
         <AnimatedRefreshIcon loading={isRefreshing} />
       </IconButton>

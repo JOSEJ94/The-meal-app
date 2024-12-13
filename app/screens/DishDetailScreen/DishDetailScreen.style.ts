@@ -1,7 +1,8 @@
 import { Theme } from "@/theme"
-import { StyleSheet } from "react-native"
+import { Dimensions, StyleSheet } from "react-native"
 import { EdgeInsets } from "react-native-safe-area-context"
 
+const { height } = Dimensions.get("screen")
 export const createStyles = (theme: Theme, insets: EdgeInsets) =>
   StyleSheet.create({
     loaderContainer: {
@@ -41,8 +42,18 @@ export const createStyles = (theme: Theme, insets: EdgeInsets) =>
       marginTop: theme.spacing.md,
       marginBottom: theme.spacing.xxs,
     },
+    refreshPortraitButton: {
+      top: height * 0.33 - 30, // Image height(a 3rd of the screen height) - half the button height
+      right: theme.spacing.lg,
+      position: "absolute",
+    },
+    refreshLandscapeButton: {
+      left: theme.spacing.sm + insets.left / 2,
+      bottom: theme.spacing.md,
+      position: "absolute",
+    },
     imagePortraitContainer: {
-      maxHeight: 250,
+      maxHeight: height * 0.33, // Image height(a 3rd of the screen height)
     },
     imageLandscapeContainer: {
       flex: 1,
