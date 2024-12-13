@@ -19,7 +19,6 @@ export const DishStoreModel = types
       if (self.loading) return
       const lastResult = self.results[0]?.idMeal || null
       self.loading = true
-      self.error = ""
       try {
         const networkStatus: NetInfoState = yield fetchNetworkStatus()
         if (networkStatus.isInternetReachable) {
@@ -29,6 +28,7 @@ export const DishStoreModel = types
           if (dish && !self.allDishes.has(dish.idMeal)) {
             self.allDishes.set(dish.idMeal, dish)
             self.results = [self.allDishes.get(dish.idMeal)!]
+            self.error = ""
           }
         } else {
           // Use allDishes for offline results

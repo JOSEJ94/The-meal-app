@@ -10,6 +10,20 @@ export const createStyles = (theme: Theme, insets: EdgeInsets) =>
       flex: 1,
       gap: theme.spacing.lg,
     },
+    errorContainer: {
+      justifyContent: "center",
+      alignItems: "center",
+      flex: 1,
+    },
+    errorTitle: {
+      textAlign: "center",
+      marginHorizontal: theme.spacing.lg,
+      marginBottom: theme.spacing.md,
+    },
+    errorDescription: {
+      marginHorizontal: theme.spacing.lg,
+      marginBottom: theme.spacing.md,
+    },
     ingredient: {
       marginBottom: theme.spacing.sm,
     },

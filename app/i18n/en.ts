@@ -14,6 +14,9 @@ const en = {
     openVideo: "Open Video",
     ingredientsTitle: "Ingredients",
     instructionsTitle: "Instructions",
+    errorTitle: "An error occurred while loading the dish",
+    errorDescription: "Please try again.",
+    errorTryAgain: "Try again",
   },
   welcomeScreen: {
     postscript:

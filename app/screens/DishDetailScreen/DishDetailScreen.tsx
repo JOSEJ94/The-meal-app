@@ -17,6 +17,7 @@ import { AnimatedRefreshIcon } from "@/components/Icons/RefreshIcon/AnimatedRefr
 import FastImage from "react-native-fast-image"
 import { Dish } from "@/services/api"
 import { createStyles } from "./DishDetailScreen.style"
+import placeholderDishImage from "assets/images/dish-placeholder.png"
 
 export const DishDetailScreen = observer(() => {
   const { theme } = useAppTheme()
@@ -79,7 +80,11 @@ export const DishDetailScreen = observer(() => {
   )
 
   const renderDishDetailImage = () => (
-    <FastImage source={{ uri: dish?.strMealThumb, cache: "immutable" }} style={styles.image} />
+    <FastImage
+      defaultSource={placeholderDishImage}
+      source={{ uri: dish?.strMealThumb, cache: "immutable" }}
+      style={styles.image}
+    />
   )
 
   useEffect(() => {
@@ -91,6 +96,24 @@ export const DishDetailScreen = observer(() => {
       <Screen contentContainerStyle={styles.loaderContainer}>
         <ActivityIndicator size="large" color={theme.colors.accentTint} />
         <Typography variant={TypographyVariant.SUBTITLE} tx="dishDetailScreen:loading" />
+      </Screen>
+    )
+  }
+
+  if (Boolean(error)) {
+    return (
+      <Screen contentContainerStyle={styles.errorContainer}>
+        <Typography
+          style={styles.errorTitle}
+          variant={TypographyVariant.TITLE}
+          tx="dishDetailScreen:errorTitle"
+        />
+        <Typography
+          style={styles.errorTitle}
+          variant={TypographyVariant.SUBTITLE}
+          tx="dishDetailScreen:errorDescription"
+        />
+        <Button tx="dishDetailScreen:errorTryAgain" disabled={isRefreshing} onPress={refreshDish} />
       </Screen>
     )
   }

@@ -16,6 +16,9 @@ const es: Translations = {
     openVideo: "Abrir Vídeo",
     ingredientsTitle: "Ingredientes",
     instructionsTitle: "Instrucciones",
+    errorTitle: "Un error ocurrió mientras se cargaba el platillo ",
+    errorDescription: "Por favor intenta de nuevo.",
+    errorTryAgain: "Intentar de nuevo",
   },
   welcomeScreen: {
     postscript:
