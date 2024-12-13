@@ -23,6 +23,7 @@ import { spacing, ThemedStyle } from "@/theme"
 import { useAppTheme } from "@/utils/useAppTheme"
 import { useOrientation } from "@/utils/useOrientation"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { AnimatedRefreshIcon } from "@/components/Icons/RefreshIcon/AnimatedRefreshIcon"
 
 export const DishDetailScreen = observer(() => {
   const { themed, theme } = useAppTheme()
@@ -72,7 +73,7 @@ export const DishDetailScreen = observer(() => {
         tx="dishDetailScreen:instructionsTitle"
         style={themed($instructionsTitleStyle)}
       />
-      {Boolean(dish.strYoutube) && (
+      {Boolean(dish?.strYoutube) && (
         <Button
           variant={ButtonVariant.SECONDARY}
           tx="dishDetailScreen:openVideo"
@@ -104,11 +105,11 @@ export const DishDetailScreen = observer(() => {
     <>
       <View style={themed($imagePortraitContainerStyle)}>{renderDishDetailImage()}</View>
       <IconButton
-        onPress={fetchRandomDish}
-        disabled={loading}
+        onPress={refreshDish}
+        disabled={loading || isRefreshing}
         style={{ top: 220, right: 20, position: "absolute" }}
       >
-        <Typography>+</Typography>
+        <AnimatedRefreshIcon loading={isRefreshing} />
       </IconButton>
       <View style={themed($informationContainerViewStyle)}>{renderDishDetailInformation()}</View>
     </>
@@ -116,11 +117,11 @@ export const DishDetailScreen = observer(() => {
     <View style={themed($landScapeContainerViewStyle)}>
       <View style={themed($imageLandscapeContainerStyle)}>{renderDishDetailImage()}</View>
       <IconButton
-        onPress={fetchRandomDish}
-        disabled={loading}
+        onPress={refreshDish}
+        disabled={loading || isRefreshing}
         style={{ left: 10 + insets.left / 2, bottom: 15, position: "absolute" }}
       >
-        <Typography>+</Typography>
+        <AnimatedRefreshIcon loading={isRefreshing} />
       </IconButton>
       <ScrollView
         refreshControl={refreshControl}

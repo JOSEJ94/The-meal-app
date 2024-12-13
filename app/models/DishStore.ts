@@ -13,6 +13,7 @@ export const DishStoreModel = types
   .actions((self) => ({
     fetchRandomDish: flow(function* () {
       if (self.loading) return
+      self.results.clear()
       self.loading = true
       self.error = ""
       try {
