@@ -111,6 +111,13 @@ export const DishDetailScreen = observer(() => {
   ) : (
     <View style={themed($landScapeContainerViewStyle)}>
       <View style={themed($imageLandscapeContainerStyle)}>{renderDishDetailImage()}</View>
+      <IconButton
+        onPress={fetchRandomDish}
+        disabled={loading}
+        style={{ left: 5 + insets.left / 2, bottom: 30, position: "absolute" }}
+      >
+        <Typography>+</Typography>
+      </IconButton>
       <ScrollView
         refreshControl={refreshControl}
         style={[
