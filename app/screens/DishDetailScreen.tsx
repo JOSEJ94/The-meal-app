@@ -44,9 +44,13 @@ export const DishDetailScreen = observer(() => {
   const refreshControl = <RefreshControl refreshing={isRefreshing} onRefresh={refreshDish} />
 
   const onOpenVideoPress = async () => {
-    const canBeOpened = await Linking.canOpenURL(dish.strYoutube)
-    if (canBeOpened) {
+    // I was using Linking.canOpenURL before, but it does not work correctly on Android for some reason
+    try {
       Linking.openURL(dish.strYoutube)
+    } catch (err: any) {
+      console.error(
+        `Url could not be opened on the device ${dish.strYoutube} because: ${err.message}`,
+      )
     }
   }
 
