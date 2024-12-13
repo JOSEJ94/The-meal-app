@@ -60,7 +60,7 @@ export const DishDetailScreen = observer(() => {
         tx="dishDetailScreen:ingredientsTitle"
         style={themed($ingredientsStyle)}
       />
-      {dish?.ingredients.map((ingredient: string, idx: number) => (
+      {dish?.ingredients?.map((ingredient: string, idx: number) => (
         <Typography key={`ing-${idx}`}>• {ingredient}</Typography>
       ))}
       <Typography
