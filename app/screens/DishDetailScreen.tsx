@@ -1,10 +1,9 @@
 import {
   ActivityIndicator,
-  Image,
-  ImageStyle,
   Linking,
   RefreshControl,
   ScrollView,
+  StyleProp,
   View,
   ViewStyle,
 } from "react-native"
@@ -24,6 +23,7 @@ import { useAppTheme } from "@/utils/useAppTheme"
 import { useOrientation } from "@/utils/useOrientation"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { AnimatedRefreshIcon } from "@/components/Icons/RefreshIcon/AnimatedRefreshIcon"
+import FastImage, { ImageStyle } from "react-native-fast-image"
 
 export const DishDetailScreen = observer(() => {
   const { themed, theme } = useAppTheme()
@@ -85,7 +85,7 @@ export const DishDetailScreen = observer(() => {
   )
 
   const renderDishDetailImage = () => (
-    <Image source={{ uri: dish?.strMealThumb }} style={themed($imageStyle)} />
+    <FastImage source={{ uri: dish?.strMealThumb, cache: "immutable" }} style={$imageStyle} />
   )
 
   useEffect(() => {
@@ -179,10 +179,10 @@ const $imageLandscapeContainerStyle: ThemedStyle<ImageStyle> = ({}) => ({
   flex: 1,
 })
 
-const $imageStyle: ThemedStyle<ImageStyle> = ({}) => ({
+const $imageStyle: StyleProp<ImageStyle> = {
   width: "100%",
   height: "100%",
-})
+}
 
 const $landScapeContainerViewStyle: ThemedStyle<ViewStyle> = ({}) => ({
   flexDirection: "row",
