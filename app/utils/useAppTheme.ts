@@ -66,7 +66,7 @@ interface UseAppThemeValue {
   // A function to apply the theme to a style object.
   // See examples in the components directory or read the docs here:
   // https://docs.infinite.red/ignite-cli/boilerplate/app/utils/
-  themed: <T>(styleOrStyleFn: ThemedStyle<T> | StyleProp<T> | ThemedStyleArray<T>) => T
+  themed: <T>(styleOrStyleFn: ThemedStyle<T> | StyleProp<T> | ThemedStyleArray<T>, args?: any) => T
 }
 
 /**
@@ -92,11 +92,11 @@ export const useAppTheme = (): UseAppThemeValue => {
   const themeVariant: Theme = useMemo(() => themeContextToTheme(themeContext), [themeContext])
 
   const themed = useCallback(
-    <T>(styleOrStyleFn: ThemedStyle<T> | StyleProp<T> | ThemedStyleArray<T>) => {
+    <T>(styleOrStyleFn: ThemedStyle<T> | StyleProp<T> | ThemedStyleArray<T>, args?: any) => {
       const flatStyles = [styleOrStyleFn].flat(3)
       const stylesArray = flatStyles.map((f) => {
         if (typeof f === "function") {
-          return (f as ThemedStyle<T>)(themeVariant)
+          return (f as ThemedStyle<T>)(themeVariant, args)
         } else {
           return f
         }

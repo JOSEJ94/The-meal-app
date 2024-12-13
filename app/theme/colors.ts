@@ -2,6 +2,10 @@ const palette = {
   primary1: "#731DF7",
   primary2: "#3C11BF",
 
+  secondary1: "#01CCD2",
+
+  neutral1: "#D3D3D3",
+
   neutral100: "#FFFFFF",
   neutral200: "#F4F2F1",
   neutral300: "#D7CEC9",
@@ -59,6 +63,10 @@ export const colors = {
    */
   tintInactive: palette.neutral300,
   /**
+   * Secondary color.
+   */
+  accentTint: palette.secondary1,
+  /**
    * A subtle color used for lines.
    */
   separator: palette.neutral300,
@@ -70,4 +78,8 @@ export const colors = {
    * Error Background.
    */
   errorBackground: palette.angry100,
+  /**
+   * Subtle color used in minor elements that are interactive but should not draw too much attention.
+   */
+  subtleInteractiveElement: palette.neutral1,
 } as const

@@ -2,6 +2,10 @@ const palette = {
   primary1: "#731DF7",
   primary2: "#3C11BF",
 
+  secondary1: "#01CCD2",
+
+  neutral1: "#D3D3D3",
+
   neutral900: "#FFFFFF",
   neutral800: "#F4F2F1",
   neutral700: "#D7CEC9",
@@ -28,8 +32,10 @@ export const colors = {
   border: palette.neutral400,
   tint: palette.primary1,
   tintShadow: palette.primary2,
+  accentTint: palette.secondary1,
   tintInactive: palette.neutral300,
   separator: palette.neutral300,
   error: palette.angry500,
   errorBackground: palette.angry100,
+  subtleInteractiveElement: palette.neutral1,
 } as const
