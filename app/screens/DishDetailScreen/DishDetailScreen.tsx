@@ -1,13 +1,5 @@
-import {
-  ActivityIndicator,
-  Linking,
-  RefreshControl,
-  ScrollView,
-  StyleProp,
-  View,
-  ViewStyle,
-} from "react-native"
-import React, { useEffect, useState } from "react"
+import { ActivityIndicator, Linking, RefreshControl, ScrollView, View } from "react-native"
+import React, { useEffect, useMemo, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { useStores } from "@/models"
 import {
@@ -18,28 +10,29 @@ import {
   Typography,
   TypographyVariant,
 } from "@/components"
-import { spacing, ThemedStyle } from "@/theme"
 import { useAppTheme } from "@/utils/useAppTheme"
 import { useOrientation } from "@/utils/useOrientation"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { AnimatedRefreshIcon } from "@/components/Icons/RefreshIcon/AnimatedRefreshIcon"
-import FastImage, { ImageStyle } from "react-native-fast-image"
+import FastImage from "react-native-fast-image"
 import { Dish } from "@/services/api"
+import { createStyles } from "./DishDetailScreen.style"
 
 export const DishDetailScreen = observer(() => {
-  const { themed, theme } = useAppTheme()
+  const { theme } = useAppTheme()
   const insets = useSafeAreaInsets()
+  const styles = useMemo(() => createStyles(theme, insets), [theme, insets])
   const { dishStore } = useStores()
   const isPortrait = useOrientation()
   const [isRefreshing, setIsRefreshing] = useState(false)
   const { fetchRandomDish, error, loading, results } = dishStore
   const dish = results.length ? (results[0] as Dish) : null
 
-  const getFromApi = async () => await fetchRandomDish()
+  const loadRandomDish = async () => await fetchRandomDish()
 
   const refreshDish = async () => {
     setIsRefreshing(true)
-    await getFromApi()
+    await loadRandomDish()
     setIsRefreshing(false)
   }
 
@@ -58,13 +51,13 @@ export const DishDetailScreen = observer(() => {
 
   const renderDishDetailInformation = () => (
     <>
-      <Typography variant={TypographyVariant.TITLE} style={themed($titleStyle)}>
+      <Typography variant={TypographyVariant.TITLE} style={styles.title}>
         {dish?.strMeal}
       </Typography>
       <Typography
         variant={TypographyVariant.SUBTITLE}
         tx="dishDetailScreen:ingredientsTitle"
-        style={themed($ingredientsStyle)}
+        style={styles.ingredient}
       />
       {dish?.ingredients?.map((ingredient: string, idx: number) => (
         <Typography key={`ing-${idx}`}>• {ingredient}</Typography>
@@ -72,7 +65,7 @@ export const DishDetailScreen = observer(() => {
       <Typography
         variant={TypographyVariant.SUBTITLE}
         tx="dishDetailScreen:instructionsTitle"
-        style={themed($instructionsTitleStyle)}
+        style={styles.instructionsTitle}
       />
       {Boolean(dish?.strYoutube) && (
         <Button
@@ -81,21 +74,21 @@ export const DishDetailScreen = observer(() => {
           onPress={onOpenVideoPress}
         />
       )}
-      <Typography style={themed($instructionsStyle)}>{dish?.strInstructions}</Typography>
+      <Typography style={styles.instructions}>{dish?.strInstructions}</Typography>
     </>
   )
 
   const renderDishDetailImage = () => (
-    <FastImage source={{ uri: dish?.strMealThumb, cache: "immutable" }} style={$imageStyle} />
+    <FastImage source={{ uri: dish?.strMealThumb, cache: "immutable" }} style={styles.image} />
   )
 
   useEffect(() => {
-    getFromApi()
+    loadRandomDish()
   }, [])
 
   if (loading && !isRefreshing) {
     return (
-      <Screen contentContainerStyle={themed($loadingContainerViewStyle)}>
+      <Screen contentContainerStyle={styles.loaderContainer}>
         <ActivityIndicator size="large" color={theme.colors.accentTint} />
         <Typography variant={TypographyVariant.SUBTITLE} tx="dishDetailScreen:loading" />
       </Screen>
@@ -104,7 +97,7 @@ export const DishDetailScreen = observer(() => {
 
   const content = isPortrait ? (
     <>
-      <View style={themed($imagePortraitContainerStyle)}>{renderDishDetailImage()}</View>
+      <View style={styles.imagePortraitContainer}>{renderDishDetailImage()}</View>
       <IconButton
         onPress={refreshDish}
         disabled={loading || isRefreshing}
@@ -112,11 +105,11 @@ export const DishDetailScreen = observer(() => {
       >
         <AnimatedRefreshIcon loading={isRefreshing} />
       </IconButton>
-      <View style={themed($informationContainerViewStyle)}>{renderDishDetailInformation()}</View>
+      <View style={styles.informationContainer}>{renderDishDetailInformation()}</View>
     </>
   ) : (
-    <View style={themed($landScapeContainerViewStyle)}>
-      <View style={themed($imageLandscapeContainerStyle)}>{renderDishDetailImage()}</View>
+    <View style={styles.landScapeContainer}>
+      <View style={styles.imageLandscapeContainer}>{renderDishDetailImage()}</View>
       <IconButton
         onPress={refreshDish}
         disabled={loading || isRefreshing}
@@ -126,10 +119,8 @@ export const DishDetailScreen = observer(() => {
       </IconButton>
       <ScrollView
         refreshControl={refreshControl}
-        style={[
-          themed($informationContainerViewStyle),
-          { paddingRight: spacing.md + insets.right },
-        ]}
+        contentContainerStyle={styles.informationContainer}
+        style={styles.informationContentContainer}
       >
         {renderDishDetailInformation()}
       </ScrollView>
@@ -146,51 +137,4 @@ export const DishDetailScreen = observer(() => {
       {content}
     </Screen>
   )
-})
-
-const $loadingContainerViewStyle: ThemedStyle<ViewStyle> = ({}) => ({
-  justifyContent: "center",
-  alignItems: "center",
-  flex: 1,
-  gap: 20,
-})
-
-const $titleStyle: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  marginBottom: spacing.md,
-})
-
-const $ingredientsStyle: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  marginBottom: spacing.sm,
-})
-
-const $instructionsStyle: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  marginVertical: spacing.xs,
-})
-
-const $instructionsTitleStyle: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  marginTop: spacing.md,
-  marginBottom: spacing.xxs,
-})
-
-const $imagePortraitContainerStyle: ThemedStyle<ImageStyle> = ({}) => ({
-  maxHeight: 250,
-})
-
-const $imageLandscapeContainerStyle: ThemedStyle<ImageStyle> = ({}) => ({
-  flex: 1,
-})
-
-const $imageStyle: StyleProp<ImageStyle> = {
-  width: "100%",
-  height: "100%",
-}
-
-const $landScapeContainerViewStyle: ThemedStyle<ViewStyle> = ({}) => ({
-  flexDirection: "row",
-})
-
-const $informationContainerViewStyle: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  flex: 1,
-  paddingVertical: spacing.lg,
-  paddingHorizontal: spacing.md,
 })
