@@ -11,6 +11,12 @@ const es: Translations = {
     title: "Tienes hambre?",
     cta: "Dame un platillo!",
   },
+  dishDetailScreen: {
+    loading: "Cargando platillo...",
+    openVideo: "Abrir Vídeo",
+    ingredientsTitle: "Ingredientes",
+    instructionsTitle: "Instrucciones",
+  },
   welcomeScreen: {
     postscript:
       "psst — Esto probablemente no es cómo se va a ver tu app. (A menos que tu diseñador te haya enviado estas pantallas, y en ese caso, ¡lánzalas en producción!)",

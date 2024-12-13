@@ -9,6 +9,12 @@ const en = {
     title: "Are you hungry?",
     cta: "Get me a meal!",
   },
+  dishDetailScreen: {
+    loading: "Loading meal...",
+    openVideo: "Open Video",
+    ingredientsTitle: "Ingredients",
+    instructionsTitle: "Instructions",
+  },
   welcomeScreen: {
     postscript:
       "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
