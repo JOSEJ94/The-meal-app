@@ -24,6 +24,7 @@ import { useOrientation } from "@/utils/useOrientation"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { AnimatedRefreshIcon } from "@/components/Icons/RefreshIcon/AnimatedRefreshIcon"
 import FastImage, { ImageStyle } from "react-native-fast-image"
+import { Dish } from "@/services/api"
 
 export const DishDetailScreen = observer(() => {
   const { themed, theme } = useAppTheme()
@@ -32,7 +33,7 @@ export const DishDetailScreen = observer(() => {
   const isPortrait = useOrientation()
   const [isRefreshing, setIsRefreshing] = useState(false)
   const { fetchRandomDish, error, loading, results } = dishStore
-  const dish = results.length ? results[0] : null
+  const dish = results.length ? (results[0] as Dish) : null
 
   const getFromApi = async () => await fetchRandomDish()
 
@@ -47,10 +48,10 @@ export const DishDetailScreen = observer(() => {
   const onOpenVideoPress = async () => {
     // I was using Linking.canOpenURL before, but it does not work correctly on Android for some reason
     try {
-      Linking.openURL(dish.strYoutube)
+      Linking.openURL(dish?.strYoutube!)
     } catch (err: any) {
       console.error(
-        `Url could not be opened on the device ${dish.strYoutube} because: ${err.message}`,
+        `Url could not be opened on the device ${dish?.strYoutube} because: ${err.message}`,
       )
     }
   }

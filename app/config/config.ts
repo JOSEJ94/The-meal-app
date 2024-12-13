@@ -1,3 +1,5 @@
+const { EXPO_PUBLIC_API_URL } = process.env
+
 /**
  * These are configuration settings for the dev environment.
  *
@@ -5,6 +7,10 @@
  *
  * https://reactnative.dev/docs/security#storing-sensitive-info
  */
-export default {
-  API_URL: "https://api.rss2json.com/v1/",
+if (!EXPO_PUBLIC_API_URL) {
+  console.error(`You're missing some env vars in your .env file`)
 }
+
+export default {
+  API_URL: EXPO_PUBLIC_API_URL!,
+} as const

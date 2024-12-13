@@ -7,7 +7,8 @@
  */
 import { ApisauceInstance, create } from "apisauce"
 import Config from "../../config"
-import type { ApiConfig } from "./api.types"
+import type { ApiConfig, ApiRandomDishResponse } from "./api.types"
+import { fromIngredientFieldsToList } from "./utils/transformation"
 
 /**
  * Configuring the apisauce instance.
@@ -37,6 +38,26 @@ export class Api {
         Accept: "application/json",
       },
     })
+  }
+
+  /**
+   * The brings back information from API with a Random dish.
+   * @returns An array containing a single dish object, selected randomly.
+   */
+  getRandomDish = async () => {
+    try {
+      const response = await this.apisauce.get<ApiRandomDishResponse>("random.php")
+      if (response.status && response.status >= 200 && response.status < 300) {
+        const { data } = response
+        const meals = data?.meals?.map(fromIngredientFieldsToList) || []
+        return meals
+      } else {
+        throw new Error("An error occurred while fetching a random dish")
+      }
+    } catch (error: any) {
+      console.error(error)
+      throw error
+    }
   }
 }
 
