@@ -27,9 +27,9 @@ export const DishStoreModel = types
           const dish: Dish = dishes.length ? dishes[0] : null
           if (dish && !self.allDishes.has(dish.idMeal)) {
             self.allDishes.set(dish.idMeal, dish)
-            self.results = [self.allDishes.get(dish.idMeal)!]
-            self.error = ""
           }
+          self.results = [self.allDishes.get(dish.idMeal)!]
+          self.error = ""
         } else {
           // Use allDishes for offline results
           const offlineDishes = Array.from(self.allDishes.values())
