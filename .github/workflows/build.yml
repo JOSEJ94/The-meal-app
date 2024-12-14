@@ -55,18 +55,11 @@ jobs:
           ./gradlew assembleRelease -PHOMEPLANNER_UPLOAD_STORE_FILE=Production.keystore -PHOMEPLANNER_UPLOAD_STORE_PASSWORD=${{ secrets.ANDROID_KEYSTORE_PASSWORD }} -PHOMEPLANNER_UPLOAD_KEY_ALIAS=${{ secrets.ANDROID_KEY_ALIAS }} -PHOMEPLANNER_UPLOAD_KEY_PASSWORD=${{ secrets.ANDROID_KEYSTORE_PASSWORD }} -PBUILD_NUMBER=${{ steps.build-number.outputs.timestamp }}
 
       - name: Create GitHub Release
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: "v1.0.0 (${{ steps.build-number.outputs.timestamp }})"
-          release_name: "The Meal App - v1.0.0"
-          draft: false
+          tag_name: "v1.0.0-${{ steps.build-number.outputs.timestamp }}"
+          name: "The Meal App - v1.0.0"
           prerelease: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload APK to Release
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: android/app/build/outputs/apk/release/app-release.apk
-          asset_name: app-release.apk
-          asset_content_type: application/vnd.android.package-archive
+          files: android/app/build/outputs/apk/release/app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
