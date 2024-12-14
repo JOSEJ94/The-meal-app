@@ -3,7 +3,7 @@ import React from "react"
 import { useAppTheme } from "@/utils/useAppTheme"
 import { translate, TxKeyPath } from "@/i18n"
 import { TOptions } from "i18next"
-import { colors, ThemedStyleArray } from "@/theme"
+import { ThemedStyle, ThemedStyleArray } from "@/theme"
 
 export enum TypographyVariant {
   TITLE = "Title",
@@ -56,26 +56,31 @@ export const Typography = ({
   )
 }
 
+const $textStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+  color: colors.text,
+})
+
+const $captionStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+  fontStyle: "italic",
+  color: colors.text,
+  fontSize: 14,
+})
+
+const $subtitleStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+  color: colors.textDim,
+  fontWeight: "bold",
+  fontSize: 18,
+})
+
+const $titleStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+  fontSize: 28,
+  color: colors.text,
+  fontWeight: "bold",
+})
+
 const $typographyStyles: Record<TypographyVariant, ThemedStyleArray<TextStyle>> = {
-  Text: [{}],
-  Caption: [
-    {
-      fontStyle: "italic",
-      fontSize: 14,
-    },
-  ],
-  Subtitle: [
-    {
-      color: colors.textDim,
-      fontWeight: "bold",
-      fontSize: 18,
-    },
-  ],
-  Title: [
-    {
-      color: colors.text,
-      fontSize: 28,
-      fontWeight: "bold",
-    },
-  ],
+  Text: [$textStyle],
+  Caption: [$captionStyle],
+  Subtitle: [$subtitleStyle],
+  Title: [$titleStyle],
 }

@@ -56,7 +56,7 @@ const AppStack = observer(function AppStack() {
       screenOptions={{
         headerBackTitle: translate("common:back"),
         headerTitle: translate("common:headerTitle"),
-        headerTintColor: colors.palette.neutral100,
+        headerTintColor: colors.palette.white,
         headerStyle: {
           backgroundColor: colors.tint,
         },

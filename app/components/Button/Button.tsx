@@ -90,7 +90,7 @@ const $secondaryButtonTextStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
 
 const $primaryButtonTextStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
   textTransform: "uppercase",
-  color: colors.palette.neutral100,
+  color: colors.palette.white,
   fontWeight: "bold",
 })
 

@@ -5,6 +5,7 @@ const palette = {
   secondary1: "#01CCD2",
 
   neutral1: "#D3D3D3",
+  white: "#FFFFFF",
 
   neutral100: "#FFFFFF",
   neutral200: "#F4F2F1",
