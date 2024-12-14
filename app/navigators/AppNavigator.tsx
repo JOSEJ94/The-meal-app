@@ -13,7 +13,6 @@ import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useAppTheme, useThemeProvider } from "@/utils/useAppTheme"
 import { ComponentProps } from "react"
 import { translate } from "@/i18n"
-import { View } from "react-native"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -57,7 +56,7 @@ const AppStack = observer(function AppStack() {
       screenOptions={{
         headerBackTitle: translate("common:back"),
         headerTitle: translate("common:headerTitle"),
-        headerTintColor: colors.palette.neutral100,
+        headerTintColor: colors.palette.white,
         headerStyle: {
           backgroundColor: colors.tint,
         },
@@ -67,7 +66,7 @@ const AppStack = observer(function AppStack() {
       }}
     >
       <Stack.Screen name="GetStarted" component={Screens.GetStartedScreen} />
-      <Stack.Screen name="DishDetails" component={() => <View />} />
+      <Stack.Screen name="DishDetails" component={Screens.DishDetailScreen} />
     </Stack.Navigator>
   )
 })

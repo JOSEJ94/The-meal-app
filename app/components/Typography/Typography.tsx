@@ -1,8 +1,16 @@
-import { View, Text, TextProps, TextStyle, StyleProp } from "react-native"
+import { Text, TextProps, TextStyle, StyleProp } from "react-native"
 import React from "react"
 import { useAppTheme } from "@/utils/useAppTheme"
 import { translate, TxKeyPath } from "@/i18n"
 import { TOptions } from "i18next"
+import { ThemedStyle, ThemedStyleArray } from "@/theme"
+
+export enum TypographyVariant {
+  TITLE = "Title",
+  SUBTITLE = "Subtitle",
+  CAPTION = "Caption",
+  TEXT = "Text",
+}
 
 interface TypographyProps extends TextProps {
   /**
@@ -23,14 +31,56 @@ interface TypographyProps extends TextProps {
    */
   style?: StyleProp<TextStyle>
   /**
-   * One of the different types of text presets.
+   * One of the different types of text variants.
    */
+  variant?: TypographyVariant
 }
 
-export const Typography = ({ children, text, tx, txOptions, ...rest }: TypographyProps) => {
+export const Typography = ({
+  children,
+  text,
+  tx,
+  txOptions,
+  style,
+  variant = TypographyVariant.TEXT,
+  ...rest
+}: TypographyProps) => {
   const { themed } = useAppTheme()
   const i18nText = tx && translate(tx, txOptions)
   const content = i18nText || text || children
 
-  return <Text {...rest}>{content}</Text>
+  return (
+    <Text style={[themed($typographyStyles[variant]), style]} {...rest}>
+      {content}
+    </Text>
+  )
+}
+
+const $textStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+  color: colors.text,
+})
+
+const $captionStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+  fontStyle: "italic",
+  color: colors.text,
+  fontSize: 14,
+})
+
+const $subtitleStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+  color: colors.textDim,
+  fontWeight: "bold",
+  fontSize: 18,
+})
+
+const $titleStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+  fontSize: 28,
+  color: colors.text,
+  fontWeight: "bold",
+})
+
+const $typographyStyles: Record<TypographyVariant, ThemedStyleArray<TextStyle>> = {
+  Text: [$textStyle],
+  Caption: [$captionStyle],
+  Subtitle: [$subtitleStyle],
+  Title: [$titleStyle],
 }

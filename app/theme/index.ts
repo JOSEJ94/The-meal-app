@@ -63,7 +63,7 @@ export const darkTheme: Theme = {
  *   return <View style={themed($container)} />
  * }
  */
-export type ThemedStyle<T> = (theme: Theme) => T
+export type ThemedStyle<T> = (theme: Theme, args?: any) => T
 export type ThemedStyleArray<T> = (
   | ThemedStyle<T>
   | StyleProp<T>

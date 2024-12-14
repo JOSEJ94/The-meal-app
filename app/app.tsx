@@ -35,14 +35,11 @@ import { loadDateFnsLocale } from "./utils/formatDate"
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
 // Web linking configuration
-const prefix = Linking.createURL("/")
+const prefix = Linking.createURL("http://localhost:8081")
 const config = {
   screens: {
-    Login: {
-      path: "",
-    },
-    Welcome: "welcome",
     GetStarted: "getstarted",
+    DishDetails: "dishdetails",
   },
 }
 
@@ -102,7 +99,6 @@ function App(props: AppProps) {
     config,
   }
 
-  // otherwise, we're ready to render the app
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <ErrorBoundary catchErrors={Config.catchErrors}>

@@ -10,11 +10,11 @@ import React from "react"
 import { translate, TxKeyPath } from "@/i18n"
 import { TOptions } from "i18next"
 import { useAppTheme } from "@/utils/useAppTheme"
-import { ThemedStyle } from "@/theme"
+import { ThemedStyle, ThemedStyleArray } from "@/theme"
 
 export enum ButtonVariant {
-  PRIMARY,
-  SECONDARY,
+  PRIMARY = "Primary",
+  SECONDARY = "Secondary",
 }
 
 export interface ButtonProps extends TouchableHighlightProps {
@@ -35,6 +35,10 @@ export interface ButtonProps extends TouchableHighlightProps {
    * as well as explicitly setting locale or translation fallbacks.
    */
   txOptions?: TOptions
+  /**
+   * Button variant that defines the style applied to this button
+   */
+  variant?: ButtonVariant
 }
 
 export const Button = ({
@@ -44,6 +48,7 @@ export const Button = ({
   children,
   textStyle,
   style,
+  variant = ButtonVariant.PRIMARY,
   ...rest
 }: ButtonProps) => {
   const { themed, theme } = useAppTheme()
@@ -53,24 +58,48 @@ export const Button = ({
   return (
     <TouchableHighlight
       accessibilityRole="button"
-      style={[themed($baseViewStyle), style]}
+      style={[themed($buttonStyles[variant]), style]}
       hitSlop={theme.spacing.xs}
+      underlayColor={theme.colors.accentTint}
       {...rest}
     >
-      <Text style={[themed($baseTextStyle), textStyle]}>{content}</Text>
+      <Text style={[themed($buttonTextStyles[variant]), textStyle]}>{content}</Text>
     </TouchableHighlight>
   )
 }
 
-const $baseViewStyle: ThemedStyle<ViewStyle> = ({ spacing, colors }) => ({
+const $primaryButtonStyle: ThemedStyle<ViewStyle> = ({ spacing, colors }) => ({
   backgroundColor: colors.tint,
   borderRadius: 4,
   paddingVertical: spacing.xs,
   paddingHorizontal: spacing.md,
 })
 
-const $baseTextStyle: ThemedStyle<TextStyle> = ({ spacing, colors }) => ({
+const $secondaryButtonStyle: ThemedStyle<ViewStyle> = ({ spacing, colors }) => ({
+  backgroundColor: colors.subtleInteractiveElement,
+  borderRadius: 100,
+  alignSelf: "flex-start",
+  paddingVertical: spacing.xs,
+  paddingHorizontal: spacing.md,
+})
+
+const $secondaryButtonTextStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+  color: colors.text,
+  textAlign: "center",
+})
+
+const $primaryButtonTextStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
   textTransform: "uppercase",
-  color: colors.palette.neutral100,
+  color: colors.palette.white,
   fontWeight: "bold",
 })
+
+const $buttonStyles: Record<ButtonVariant, ThemedStyleArray<ViewStyle>> = {
+  Primary: [$primaryButtonStyle],
+  Secondary: [$secondaryButtonStyle],
+}
+
+const $buttonTextStyles: Record<ButtonVariant, ThemedStyleArray<TextStyle>> = {
+  Primary: [$primaryButtonTextStyle],
+  Secondary: [$secondaryButtonTextStyle],
+}

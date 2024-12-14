@@ -1,9 +1,12 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import { DishStoreModel } from "./DishStore"
 
 /**
  * A RootStore model.
  */
-export const RootStoreModel = types.model("RootStore").props({})
+export const RootStoreModel = types.model("RootStore").props({
+  dishStore: DishStoreModel,
+})
 
 /**
  * The RootStore instance.
