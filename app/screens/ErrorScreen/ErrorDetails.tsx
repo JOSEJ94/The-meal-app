@@ -1,6 +1,6 @@
 import { ErrorInfo } from "react"
 import { ScrollView, TextStyle, View, ViewStyle } from "react-native"
-import { Button, Icon, Screen, Text } from "../../components"
+import { Button, Screen, Typography, TypographyVariant } from "../../components"
 import type { ThemedStyle } from "@/theme"
 import { useAppTheme } from "@/utils/useAppTheme"
 
@@ -24,29 +24,27 @@ export function ErrorDetails(props: ErrorDetailsProps) {
       contentContainerStyle={themed($contentContainer)}
     >
       <View style={$topSection}>
-        <Icon icon="ladybug" size={64} />
-        <Text style={themed($heading)} preset="subheading" tx="errorScreen:title" />
-        <Text tx="errorScreen:friendlySubtitle" />
+        <Typography
+          style={themed($heading)}
+          variant={TypographyVariant.SUBTITLE}
+          tx="errorScreen:title"
+        />
+        <Typography tx="errorScreen:friendlySubtitle" />
       </View>
 
       <ScrollView
         style={themed($errorSection)}
         contentContainerStyle={themed($errorSectionContentContainer)}
       >
-        <Text style={themed($errorContent)} weight="bold" text={`${props.error}`.trim()} />
-        <Text
+        <Typography style={themed($errorContent)} text={`${props.error}`.trim()} />
+        <Typography
           selectable
           style={themed($errorBacktrace)}
           text={`${props.errorInfo?.componentStack ?? ""}`.trim()}
         />
       </ScrollView>
 
-      <Button
-        preset="reversed"
-        style={themed($resetButton)}
-        onPress={props.onReset}
-        tx="errorScreen:reset"
-      />
+      <Button style={themed($resetButton)} onPress={props.onReset} tx="errorScreen:reset" />
     </Screen>
   )
 }
