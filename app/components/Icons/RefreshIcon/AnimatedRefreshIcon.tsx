@@ -8,17 +8,22 @@ import Animated, {
   cancelAnimation,
 } from "react-native-reanimated"
 import RefreshIcon from "./RefreshIcon" // Replace with your actual SVG component
+import { useAppTheme } from "@/utils/useAppTheme"
 
 interface AnimatedRefreshIconProps {
   loading: boolean
 }
 
 export const AnimatedRefreshIcon = ({ loading }: AnimatedRefreshIconProps) => {
+  const { theme } = useAppTheme()
   const rotation = useSharedValue(0)
 
   useEffect(() => {
     if (loading) {
-      rotation.value = withRepeat(withTiming(360, { duration: 400, easing: Easing.linear }), -1)
+      rotation.value = withRepeat(
+        withTiming(360, { duration: theme.timing.quick, easing: Easing.linear }),
+        -1,
+      )
     } else {
       cancelAnimation(rotation)
       rotation.value = 0
