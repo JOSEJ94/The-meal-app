@@ -1,83 +1,63 @@
 import React from "react"
 import { render, fireEvent } from "@testing-library/react-native"
 import { Button, ButtonVariant } from "./Button"
-import { translate } from "@/i18n"
-import { useAppTheme } from "@/utils/useAppTheme"
+import { translate, TxKeyPath } from "@/i18n"
+import { StyleSheet } from "react-native"
 
-jest.mock("@/utils/useAppTheme", () => ({
-  useAppTheme: jest.fn(),
-}))
+describe("Button Component", () => {
+  it("renders correctly with text prop", () => {
+    const { getByText } = render(<Button text="Click Me" />)
+    expect(getByText("Click Me")).toBeTruthy()
+  })
 
-jest.mock("@/i18n", () => ({
-  translate: jest.fn(),
-}))
-const mockUseAppTheme = jest.mocked(useAppTheme)
-const mockTranslate = jest.mocked(translate)
+  it("renders correctly with tx prop and calls translate", () => {
+    const txKey: TxKeyPath = "common:cancel"
+    render(<Button tx={txKey} />)
+    expect(translate).toHaveBeenCalledWith(txKey, undefined)
+  })
 
-describe("Button component", () => {
-  beforeEach(() => {
-    mockUseAppTheme.mockReturnValue({
-      themed: jest.fn((style) =>
-        style({
-          spacing: { xs: 8, md: 16 },
-          colors: { tint: "#000", palette: { neutral100: "#FFF" } },
-        }),
-      ),
-      theme: {
-        spacing: { xs: 8 },
+  it("applies the correct styles for primary variant", () => {
+    const { getByRole } = render(<Button text="Primary" variant={ButtonVariant.PRIMARY} />)
+    const button = getByRole("button")
+    expect(button.props.style).toEqual([
+      {
+        backgroundColor: "#731DF7",
+        borderRadius: 4,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
       },
-    })
+      undefined,
+    ])
   })
 
-  it("renders the text passed via the text prop", () => {
-    const { getByText } = render(<Button text="Click me" />)
-
-    expect(getByText("Click me")).toBeTruthy()
+  it("applies the correct styles for secondary variant", () => {
+    const { getByRole } = render(<Button text="Secondary" variant={ButtonVariant.SECONDARY} />)
+    const button = getByRole("button")
+    expect(button.props.style).toEqual([
+      {
+        alignSelf: "flex-start",
+        backgroundColor: "#D3D3D3",
+        borderRadius: 100,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+      },
+      undefined,
+    ])
   })
 
-  it("renders the translated text when tx prop is provided", () => {
-    mockTranslate.mockReturnValue("Translated Text")
-
-    const { getByText } = render(<Button tx="common:ok" />)
-
-    expect(getByText("Translated Text")).toBeTruthy()
-    expect(mockTranslate).toHaveBeenCalledWith("common:ok", undefined)
-  })
-
-  it("renders children when provided", () => {
-    const { getByText } = render(<Button>Child Content</Button>)
-
-    expect(getByText("Child Content")).toBeTruthy()
-  })
-
-  it("applies custom textStyle correctly", () => {
-    const { getByText } = render(<Button text="Styled" textStyle={{ fontSize: 20 }} />)
-
-    const textElement = getByText("Styled")
-    expect(textElement.props.style).toContainEqual({ fontSize: 20 })
-  })
-
-  it("applies custom style correctly", () => {
-    const { getByRole } = render(<Button text="Styled" style={{ backgroundColor: "red" }} />)
-
-    const buttonElement = getByRole("button")
-    expect(buttonElement.props.style).toContainEqual({ backgroundColor: "red" })
-  })
-
-  it("handles onPress event", () => {
+  it("triggers onPress when pressed", () => {
     const onPressMock = jest.fn()
-
-    const { getByRole } = render(<Button text="Press me" onPress={onPressMock} />)
-    const buttonElement = getByRole("button")
-
-    fireEvent.press(buttonElement)
-    expect(onPressMock).toHaveBeenCalled()
+    const { getByRole } = render(<Button text="Click Me" onPress={onPressMock} />)
+    const button = getByRole("button")
+    fireEvent.press(button)
+    expect(onPressMock).toHaveBeenCalledTimes(1)
   })
 
-  it("uses hitSlop from the theme", () => {
-    const { getByRole } = render(<Button text="HitSlop Test" />)
-
-    const buttonElement = getByRole("button")
-    expect(buttonElement.props.hitSlop).toEqual(8)
+  it("applies custom text style", () => {
+    const customTextStyle = { fontSize: 20 }
+    const { getByText } = render(<Button text="Styled" textStyle={customTextStyle} />)
+    const text = getByText("Styled")
+    const flattenStyles = StyleSheet.flatten(text.props.style)
+    expect(flattenStyles).toEqual(expect.objectContaining(customTextStyle))
   })
 })

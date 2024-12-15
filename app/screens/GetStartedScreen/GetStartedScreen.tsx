@@ -7,6 +7,7 @@ import { useAppTheme } from "@/utils/useAppTheme"
 import { useNavigation } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import { AppStackParamList } from "@/navigators"
+import { translate } from "@/i18n"
 
 export const GetStartedScreen = observer(() => {
   const navigation = useNavigation<NativeStackNavigationProp<AppStackParamList>>()
@@ -19,7 +20,12 @@ export const GetStartedScreen = observer(() => {
   return (
     <Screen preset="fixed" contentContainerStyle={themed($containerViewStyle)}>
       <Typography variant={TypographyVariant.TITLE} tx="getStartedScreen:title" />
-      <Button onPress={onGetMealPressed} tx="getStartedScreen:cta" />
+      <Button
+        testID="getMealBtn"
+        accessibilityHint={translate("getStartedScreen:ctaHint")}
+        onPress={onGetMealPressed}
+        tx="getStartedScreen:cta"
+      />
     </Screen>
   )
 })

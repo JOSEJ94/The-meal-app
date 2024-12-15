@@ -11,6 +11,7 @@ import { translate, TxKeyPath } from "@/i18n"
 import { TOptions } from "i18next"
 import { useAppTheme } from "@/utils/useAppTheme"
 import { ThemedStyle, ThemedStyleArray } from "@/theme"
+import { Typography } from "../Typography/Typography"
 
 export enum ButtonVariant {
   PRIMARY = "Primary",
@@ -63,7 +64,7 @@ export const Button = ({
       underlayColor={theme.colors.accentTint}
       {...rest}
     >
-      <Text style={[themed($buttonTextStyles[variant]), textStyle]}>{content}</Text>
+      <Typography style={[themed($buttonTextStyles[variant]), textStyle]}>{content}</Typography>
     </TouchableHighlight>
   )
 }

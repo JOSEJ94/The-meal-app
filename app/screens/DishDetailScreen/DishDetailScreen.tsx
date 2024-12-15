@@ -18,6 +18,7 @@ import FastImage from "react-native-fast-image"
 import { Dish } from "@/services/api"
 import { createStyles } from "./DishDetailScreen.style"
 import placeholderDishImage from "assets/images/dish-placeholder.png"
+import { translate } from "@/i18n"
 
 export const DishDetailScreen = observer(() => {
   const { theme } = useAppTheme()
@@ -70,6 +71,8 @@ export const DishDetailScreen = observer(() => {
       />
       {Boolean(dish?.strYoutube) && (
         <Button
+          testID="openVideoBtn"
+          accessibilityHint={translate("dishDetailScreen:openVideoHint")}
           variant={ButtonVariant.SECONDARY}
           tx="dishDetailScreen:openVideo"
           onPress={onOpenVideoPress}
@@ -113,7 +116,13 @@ export const DishDetailScreen = observer(() => {
           variant={TypographyVariant.SUBTITLE}
           tx="dishDetailScreen:errorDescription"
         />
-        <Button tx="dishDetailScreen:errorTryAgain" disabled={isRefreshing} onPress={refreshDish} />
+        <Button
+          testID="tryAgainBtn"
+          accessibilityHint={translate("dishDetailScreen:errorTryAgainHint")}
+          tx="dishDetailScreen:errorTryAgain"
+          disabled={isRefreshing}
+          onPress={refreshDish}
+        />
       </Screen>
     )
   }
@@ -122,6 +131,8 @@ export const DishDetailScreen = observer(() => {
     <>
       <View style={styles.imagePortraitContainer}>{renderDishDetailImage()}</View>
       <IconButton
+        testID="refreshDishBtn"
+        accessibilityHint={translate("dishDetailScreen:refreshDishHint")}
         onPress={refreshDish}
         disabled={loading || isRefreshing}
         style={styles.refreshPortraitButton}
@@ -134,6 +145,8 @@ export const DishDetailScreen = observer(() => {
     <View style={styles.landScapeContainer}>
       <View style={styles.imageLandscapeContainer}>{renderDishDetailImage()}</View>
       <IconButton
+        testID="refreshDishBtn"
+        accessibilityHint={translate("dishDetailScreen:refreshDishHint")}
         onPress={refreshDish}
         disabled={loading || isRefreshing}
         style={styles.refreshLandscapeButton}

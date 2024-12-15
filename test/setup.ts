@@ -49,6 +49,10 @@ jest.mock("../app/i18n/i18n.ts", () => ({
   },
 }))
 
+jest.mock("@/i18n", () => ({
+  translate: jest.fn(),
+}))
+
 declare const tron // eslint-disable-line @typescript-eslint/no-unused-vars
 
 declare global {

@@ -10,6 +10,7 @@ const es: Translations = {
   getStartedScreen: {
     title: "Tienes hambre?",
     cta: "Dame un platillo!",
+    ctaHint: "Presiona para obtener una receta al azar",
   },
   dishDetailScreen: {
     loading: "Cargando platillo...",
@@ -19,6 +20,9 @@ const es: Translations = {
     errorTitle: "Un error ocurrió mientras se cargaba el platillo ",
     errorDescription: "Por favor intenta de nuevo.",
     errorTryAgain: "Intentar de nuevo",
+    errorTryAgainHint: "Presiona para recargar la información",
+    openVideoHint: "Presiona para abrir las instrucciones en youtube",
+    refreshDishHint: "Presiona para obtener un nuevo platillo",
   },
   errorScreen: {
     title: "¡Algo salió mal!",
