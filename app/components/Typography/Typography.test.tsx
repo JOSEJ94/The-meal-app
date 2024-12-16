@@ -11,11 +11,33 @@ describe("Typography Component", () => {
     expect(textElement).toBeTruthy()
   })
 
-  it("renders the correct variant styles", () => {
+  it("renders the correct variant style for TITLE variant", () => {
     const { getByText } = render(<Typography text="Title text" variant={TypographyVariant.TITLE} />)
     const textElement = getByText("Title text")
     expect(textElement.props.style).toEqual([
       expect.objectContaining({ color: "#191015", fontSize: 28, fontWeight: "bold" }),
+      undefined,
+    ])
+  })
+
+  it("renders the correct variant style for CAPTION variant", () => {
+    const { getByText } = render(
+      <Typography text="Title text" variant={TypographyVariant.CAPTION} />,
+    )
+    const textElement = getByText("Title text")
+    expect(textElement.props.style).toEqual([
+      expect.objectContaining({ color: "#191015", fontSize: 14, fontStyle: "italic" }),
+      undefined,
+    ])
+  })
+
+  it("renders the correct variant style for SUBTITLE variant", () => {
+    const { getByText } = render(
+      <Typography text="Title text" variant={TypographyVariant.SUBTITLE} />,
+    )
+    const textElement = getByText("Title text")
+    expect(textElement.props.style).toEqual([
+      expect.objectContaining({ color: "#564E4A", fontSize: 18, fontWeight: "bold" }),
       undefined,
     ])
   })

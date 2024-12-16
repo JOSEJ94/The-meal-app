@@ -49,9 +49,15 @@ jest.mock("../app/i18n/i18n.ts", () => ({
   },
 }))
 
+export const mockTranslate = jest.fn().mockImplementation((key: string) => key)
+
 jest.mock("@/i18n", () => ({
-  translate: jest.fn(),
+  translate: mockTranslate,
 }))
+
+jest.mock("react-native-keyboard-controller", () =>
+  require("react-native-keyboard-controller/jest"),
+)
 
 declare const tron // eslint-disable-line @typescript-eslint/no-unused-vars
 

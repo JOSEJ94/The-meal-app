@@ -53,7 +53,7 @@ export const DishDetailScreen = observer(() => {
 
   const renderDishDetailInformation = () => (
     <>
-      <Typography variant={TypographyVariant.TITLE} style={styles.title}>
+      <Typography testID="mealNameTxt" variant={TypographyVariant.TITLE} style={styles.title}>
         {dish?.strMeal}
       </Typography>
       <Typography
@@ -62,7 +62,9 @@ export const DishDetailScreen = observer(() => {
         style={styles.ingredient}
       />
       {dish?.ingredients?.map((ingredient: string, idx: number) => (
-        <Typography key={`ing-${idx}`}>• {ingredient}</Typography>
+        <Typography testID={`ingredient${idx}Txt`} key={`ing-${idx}`}>
+          • {ingredient}
+        </Typography>
       ))}
       <Typography
         variant={TypographyVariant.SUBTITLE}
@@ -78,7 +80,9 @@ export const DishDetailScreen = observer(() => {
           onPress={onOpenVideoPress}
         />
       )}
-      <Typography style={styles.instructions}>{dish?.strInstructions}</Typography>
+      <Typography testID="instructionsTxt" style={styles.instructions}>
+        {dish?.strInstructions}
+      </Typography>
     </>
   )
 
@@ -97,7 +101,7 @@ export const DishDetailScreen = observer(() => {
   if (loading && !isRefreshing) {
     return (
       <Screen contentContainerStyle={styles.loaderContainer}>
-        <ActivityIndicator size="large" color={theme.colors.accentTint} />
+        <ActivityIndicator testID="loadingSpinner" size="large" color={theme.colors.accentTint} />
         <Typography variant={TypographyVariant.SUBTITLE} tx="dishDetailScreen:loading" />
       </Screen>
     )
