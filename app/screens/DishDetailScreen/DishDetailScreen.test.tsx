@@ -9,6 +9,7 @@ import { AppStackParamList } from "@/navigators"
 import { Metrics, SafeAreaProvider } from "react-native-safe-area-context"
 import { Dish } from "@/services/api"
 import { useOrientation } from "@/utils/useOrientation"
+import { REFERENCE_HEIGHT, REFERENCE_WIDTH } from "@/theme/scalingReference"
 
 jest.mock("@/models", () => ({
   useStores: jest.fn(),
@@ -20,12 +21,12 @@ jest.mock("@/utils/useOrientation", () => ({
 
 // With null it will not render any screen, so these empty values (but valid) will do the trick
 const initialWindowMetricsPortrait: Metrics = {
-  frame: { height: 100, width: 50, x: 0, y: 0 },
+  frame: { height: REFERENCE_HEIGHT, width: REFERENCE_WIDTH, x: 0, y: 0 },
   insets: { bottom: 0, left: 0, right: 0, top: 0 },
 }
 
 const initialWindowMetricsLandscape: Metrics = {
-  frame: { height: 50, width: 100, x: 0, y: 0 },
+  frame: { height: REFERENCE_WIDTH, width: REFERENCE_HEIGHT, x: 0, y: 0 },
   insets: { bottom: 0, left: 0, right: 0, top: 0 },
 }
 

@@ -56,24 +56,25 @@ export const Typography = ({
   )
 }
 
-const $textStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+const $textStyle: ThemedStyle<TextStyle> = ({ colors, fontSizes }) => ({
   color: colors.text,
+  fontSize: fontSizes.sm,
 })
 
-const $captionStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+const $captionStyle: ThemedStyle<TextStyle> = ({ colors, fontSizes }) => ({
   fontStyle: "italic",
   color: colors.text,
-  fontSize: 14,
+  fontSize: fontSizes.md,
 })
 
-const $subtitleStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+const $subtitleStyle: ThemedStyle<TextStyle> = ({ colors, fontSizes }) => ({
   color: colors.textDim,
   fontWeight: "bold",
-  fontSize: 18,
+  fontSize: fontSizes.lg,
 })
 
-const $titleStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
-  fontSize: 28,
+const $titleStyle: ThemedStyle<TextStyle> = ({ colors, fontSizes }) => ({
+  fontSize: fontSizes.xxxl,
   color: colors.text,
   fontWeight: "bold",
 })

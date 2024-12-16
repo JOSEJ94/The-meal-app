@@ -4,10 +4,11 @@ import { ErrorDetails } from "./ErrorDetails"
 import { useAppTheme } from "@/utils/useAppTheme"
 import { lightTheme as mockedLightTheme } from "@/theme"
 import { Metrics, SafeAreaProvider } from "react-native-safe-area-context"
+import { REFERENCE_HEIGHT, REFERENCE_WIDTH } from "@/theme/scalingReference"
 
 // With null it will not render any screen, so these empty values (but valid) will do the trick
 const initialWindowMetrics: Metrics = {
-  frame: { height: 100, width: 50, x: 0, y: 0 },
+  frame: { height: REFERENCE_HEIGHT, width: REFERENCE_WIDTH, x: 0, y: 0 },
   insets: { bottom: 0, left: 0, right: 0, top: 0 },
 }
 

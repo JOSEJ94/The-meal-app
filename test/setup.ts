@@ -18,6 +18,18 @@ jest.doMock("react-native", () => {
           ) => success(100, 100),
         ),
       },
+      Dimensions: {
+        ...ReactNative.Dimensions,
+        get: jest.fn().mockImplementation((dim) => {
+          if (dim === "window") {
+            return {
+              width: 390, // Replace with the reference width (e.g., for iPhone 16 Pro)
+              height: 844, // Replace with the reference height (e.g., for iPhone 16 Pro)
+            }
+          }
+          return ReactNative.Dimensions.get(dim)
+        }),
+      },
     },
     ReactNative,
   )

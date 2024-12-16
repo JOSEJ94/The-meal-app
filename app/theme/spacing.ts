@@ -1,14 +1,16 @@
+import { scaleValue } from "./scalingReference"
+
 /**
   Use these spacings for margins/paddings and other whitespace throughout your app.
  */
 export const spacing = {
-  xxxs: 2,
-  xxs: 4,
-  xs: 8,
-  sm: 12,
-  md: 16,
-  lg: 24,
-  xl: 32,
-  xxl: 48,
-  xxxl: 64,
+  xxxs: scaleValue(2),
+  xxs: scaleValue(4),
+  xs: scaleValue(8),
+  sm: scaleValue(12),
+  md: scaleValue(16),
+  lg: scaleValue(24),
+  xl: scaleValue(32),
+  xxl: scaleValue(48),
+  xxxl: scaleValue(64),
 } as const

@@ -4,6 +4,7 @@ import { colors as colorsDark } from "./colorsDark"
 import { spacing } from "./spacing"
 import { timing } from "./timing"
 import { typography } from "./typography"
+import { fontSizes } from "./fontSizes"
 
 // This supports "light" and "dark" themes by default. If undefined, it'll use the system theme
 export type ThemeContexts = "light" | "dark" | undefined
@@ -17,12 +18,14 @@ export type Spacing = typeof spacing
 // These two are consistent across themes.
 export type Timing = typeof timing
 export type Typography = typeof typography
+export type FontSizes = typeof fontSizes
 
 // The overall Theme object should contain all of the data you need to style your app.
 export interface Theme {
   colors: Colors
   spacing: Spacing
   typography: Typography
+  fontSizes: FontSizes
   timing: Timing
   isDark: boolean
 }
@@ -32,6 +35,7 @@ export const lightTheme: Theme = {
   colors: colorsLight,
   spacing: spacing,
   typography,
+  fontSizes,
   timing,
   isDark: false,
 }
@@ -39,6 +43,7 @@ export const darkTheme: Theme = {
   colors: colorsDark,
   spacing: spacing,
   typography,
+  fontSizes,
   timing,
   isDark: true,
 }
