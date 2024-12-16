@@ -81,7 +81,7 @@ Follow these steps to set up and run the app locally:
 
 1.  Clone the repository.
 2.  Install dependencies:
-    `npm install`
+    `npm install --legacy-peer-deps`
 3.  Run the app:
     `npm run ios` or `npm run android`
 
