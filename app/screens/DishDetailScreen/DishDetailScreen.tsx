@@ -18,6 +18,7 @@ import FastImage from "react-native-fast-image"
 import { Dish } from "@/services/api"
 import { createStyles } from "./DishDetailScreen.style"
 import placeholderDishImage from "assets/images/dish-placeholder.png"
+import { translate } from "@/i18n"
 
 export const DishDetailScreen = observer(() => {
   const { theme } = useAppTheme()
@@ -52,7 +53,7 @@ export const DishDetailScreen = observer(() => {
 
   const renderDishDetailInformation = () => (
     <>
-      <Typography variant={TypographyVariant.TITLE} style={styles.title}>
+      <Typography testID="mealNameTxt" variant={TypographyVariant.TITLE} style={styles.title}>
         {dish?.strMeal}
       </Typography>
       <Typography
@@ -61,7 +62,9 @@ export const DishDetailScreen = observer(() => {
         style={styles.ingredient}
       />
       {dish?.ingredients?.map((ingredient: string, idx: number) => (
-        <Typography key={`ing-${idx}`}>• {ingredient}</Typography>
+        <Typography testID={`ingredient${idx}Txt`} key={`ing-${idx}`}>
+          • {ingredient}
+        </Typography>
       ))}
       <Typography
         variant={TypographyVariant.SUBTITLE}
@@ -70,12 +73,16 @@ export const DishDetailScreen = observer(() => {
       />
       {Boolean(dish?.strYoutube) && (
         <Button
+          testID="openVideoBtn"
+          accessibilityHint={translate("dishDetailScreen:openVideoHint")}
           variant={ButtonVariant.SECONDARY}
           tx="dishDetailScreen:openVideo"
           onPress={onOpenVideoPress}
         />
       )}
-      <Typography style={styles.instructions}>{dish?.strInstructions}</Typography>
+      <Typography testID="instructionsTxt" style={styles.instructions}>
+        {dish?.strInstructions}
+      </Typography>
     </>
   )
 
@@ -94,7 +101,7 @@ export const DishDetailScreen = observer(() => {
   if (loading && !isRefreshing) {
     return (
       <Screen contentContainerStyle={styles.loaderContainer}>
-        <ActivityIndicator size="large" color={theme.colors.accentTint} />
+        <ActivityIndicator testID="loadingSpinner" size="large" color={theme.colors.accentTint} />
         <Typography variant={TypographyVariant.SUBTITLE} tx="dishDetailScreen:loading" />
       </Screen>
     )
@@ -113,7 +120,13 @@ export const DishDetailScreen = observer(() => {
           variant={TypographyVariant.SUBTITLE}
           tx="dishDetailScreen:errorDescription"
         />
-        <Button tx="dishDetailScreen:errorTryAgain" disabled={isRefreshing} onPress={refreshDish} />
+        <Button
+          testID="tryAgainBtn"
+          accessibilityHint={translate("dishDetailScreen:errorTryAgainHint")}
+          tx="dishDetailScreen:errorTryAgain"
+          disabled={isRefreshing}
+          onPress={refreshDish}
+        />
       </Screen>
     )
   }
@@ -122,6 +135,8 @@ export const DishDetailScreen = observer(() => {
     <>
       <View style={styles.imagePortraitContainer}>{renderDishDetailImage()}</View>
       <IconButton
+        testID="refreshDishBtn"
+        accessibilityHint={translate("dishDetailScreen:refreshDishHint")}
         onPress={refreshDish}
         disabled={loading || isRefreshing}
         style={styles.refreshPortraitButton}
@@ -134,6 +149,8 @@ export const DishDetailScreen = observer(() => {
     <View style={styles.landScapeContainer}>
       <View style={styles.imageLandscapeContainer}>{renderDishDetailImage()}</View>
       <IconButton
+        testID="refreshDishBtn"
+        accessibilityHint={translate("dishDetailScreen:refreshDishHint")}
         onPress={refreshDish}
         disabled={loading || isRefreshing}
         style={styles.refreshLandscapeButton}

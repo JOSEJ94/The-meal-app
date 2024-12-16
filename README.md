@@ -1,164 +1,175 @@
-# Welcome to your new ignited app!
+# The Meal App
 
-[![CircleCI](https://circleci.com/gh/infinitered/ignite.svg?style=svg)](https://circleci.com/gh/infinitered/ignite)
+[![Unit Tests](https://github.com/JOSEJ94/The-meal-app/actions/workflows/test.yml/badge.svg)](https://github.com/JOSEJ94/The-meal-app/actions/workflows/test.yml)
+**The Meal App** is a React Native application designed to explore random recipes. Built using **Ignite**, **Expo**, and **TypeScript**, the app showcases a simple yet robust implementation of modern React Native practices, featuring:
 
-## The latest and greatest boilerplate for Infinite Red opinions
+- **MobX State Tree** for state management.
+- Offline support with image caching.
+- Smooth animations powered by **Reanimated**.
+- Portrait and landscape mode compatibility.
+- **Light/Dark mode** based on device preferences.
+- Internationalization (**i18n**) with support for English, Spanish, and Portuguese.
+- Automated build processes with **GitHub Actions**.
 
-This is the boilerplate that [Infinite Red](https://infinite.red) uses as a way to test bleeding-edge changes to our React Native stack.
+> [!TIP]
+> Not sure yet? Try it for Android [here](https://github.com/JOSEJ94/The-meal-app/releases)
 
-Currently includes:
+## 📱 Features
 
-- React Native
-- React Navigation
-- MobX State Tree
-- TypeScript
-- And more!
+1.  **Welcome Screen**:
 
-## Quick Start
+    - A button to navigate to the Dish Screen.
 
-The Ignite boilerplate project's structure will look similar to this:
+2.  **Dish Screen**:
 
-```
-ignite-project
-├── app
-│   ├── components
-│   ├── config
-│   ├── i18n
-│   ├── models
-│   ├── navigators
-│   ├── screens
-│   ├── services
-│   ├── theme
-│   ├── utils
-│   └── app.tsx
-├── assets
-│   ├── icons
-│   └── images
-├── test
-│   ├── __snapshots__
-│   ├── mockFile.ts
-│   └── setup.ts
-├── README.md
-├── android
-│   ├── app
-│   ├── build.gradle
-│   ├── gradle
-│   ├── gradle.properties
-│   ├── gradlew
-│   ├── gradlew.bat
-│   ├── keystores
-│   └── settings.gradle
-├── ignite
-│   └── templates
-|       |── app-icon
-│       ├── component
-│       ├── model
-│       ├── navigator
-│       └── screen
-├── index.js
-├── ios
-│   ├── IgniteProject
-│   ├── IgniteProject-tvOS
-│   ├── IgniteProject-tvOSTests
-│   ├── IgniteProject.xcodeproj
-│   └── IgniteProjectTests
-├── .env
-└── package.json
+    - Displays a **random recipe** with:
+      - Dish name.
+      - Ingredients list.
+      - Cooking instructions.
+      - Dish image (with offline caching).
+      - A button to open the recipe's **YouTube video**.
 
-```
+3.  **Offline Access**:
 
-### ./app directory
+    - Cached images ensure the app remains functional without an internet connection.
 
-Included in an Ignite boilerplate project is the `app` directory. This is a directory you would normally have to create when using vanilla React Native.
+4.  **Themes**:
 
-The inside of the `app` directory looks similar to the following:
+    - Light and dark themes dynamically adapt to the device's settings.
 
-```
-app
-├── components
-├── config
-├── i18n
-├── models
-├── navigators
-├── screens
-├── services
-├── theme
-├── utils
-└── app.tsx
-```
+5.  **Landscape Mode**:
 
-**components**
-This is where your reusable components live which help you build your screens.
+    - Fully optimized UI for both portrait and landscape orientations.
 
-**i18n**
-This is where your translations will live if you are using `react-native-i18n`.
+6.  **i18n**:
 
-**models**
-This is where your app's models will live. Each model has a directory which will contain the `mobx-state-tree` model file, test file, and any other supporting files like actions, types, etc.
+    - Support for **English**, **Spanish**, and **Portuguese**.
 
-**navigators**
-This is where your `react-navigation` navigators will live.
+7.  **Animations**:
 
-**screens**
-This is where your screen components will live. A screen is a React component which will take up the entire screen and be part of the navigation hierarchy. Each screen will have a directory containing the `.tsx` file, along with any assets or other helper files.
+    - Seamless transitions and interactions using **Reanimated**.
 
-**services**
-Any services that interface with the outside world will live here (think REST APIs, Push Notifications, etc.).
+8.  **Unit Testing**:
 
-**theme**
-Here lives the theme for your application, including spacing, colors, and typography.
+    - Ensures app reliability with test coverage.
 
-**utils**
-This is a great place to put miscellaneous helpers and utilities. Things like date helpers, formatters, etc. are often found here. However, it should only be used for things that are truly shared across your application. If a helper or utility is only used by a specific component or model, consider co-locating your helper with that component or model.
+9.  **Backend Integration**:
 
-**app.tsx** This is the entry point to your app. This is where you will find the main App component which renders the rest of the application.
+    - Connects to TheMealDB API for dish data.
 
-### ./assets directory
+10. **GitHub Actions Integration**:
+    - Automated Android builds tagged as releases.
 
-This directory is designed to organize and store various assets, making it easy for you to manage and use them in your application. The assets are further categorized into subdirectories, including `icons` and `images`:
+---
 
-```
-assets
-├── icons
-└── images
-```
+## 🚀 Getting Started
 
-**icons**
-This is where your icon assets will live. These icons can be used for buttons, navigation elements, or any other UI components. The recommended format for icons is PNG, but other formats can be used as well.
+Follow these steps to set up and run the app locally:
 
-Ignite comes with a built-in `Icon` component. You can find detailed usage instructions in the [docs](https://github.com/infinitered/ignite/blob/master/docs/Components-Icon.md).
+### **Prerequisites**
 
-**images**
-This is where your images will live, such as background images, logos, or any other graphics. You can use various formats such as PNG, JPEG, or GIF for your images.
+1.  Ensure you have the following installed:
 
-Another valuable built-in component within Ignite is the `AutoImage` component. You can find detailed usage instructions in the [docs](https://github.com/infinitered/ignite/blob/master/docs/Components-AutoImage.md).
+    - [Node.js](https://nodejs.org/)
+    - Android Studio (for Android emulation) or Xcode (for iOS emulation).
 
-How to use your `icon` or `image` assets:
+2.  Create a `.env` file in the root of the project with the following variable:
+    `EXPO_PUBLIC_API_URL=[TheMealDb API url]`
 
-```
-import { Image } from 'react-native';
+---
 
-const MyComponent = () => {
-  return (
-    <Image source={require('../assets/images/my_image.png')} />
-  );
-};
-```
+### **Installation**
 
-### ./ignite directory
+1.  Clone the repository.
+2.  Install dependencies:
+    `npm install --legacy-peer-deps`
+3.  Run the app:
+    `npm run ios` or `npm run android`
 
-The `ignite` directory stores all things Ignite, including CLI and boilerplate items. Here you will find templates you can customize to help you get started with React Native.
+---
 
-### ./test directory
+## 🧪 Running Tests
 
-This directory will hold your Jest configs and mocks.
+To run the unit tests, use the following command:
+`npm run test`
 
-## Running Maestro end-to-end tests
+---
 
-Follow our [Maestro Setup](https://ignitecookbook.com/docs/recipes/MaestroSetup) recipe from the [Ignite Cookbook](https://ignitecookbook.com/)!
+## 🔧 Technologies Used
 
-## Previous Boilerplates
+- **Frameworks & Tools**:
+  - [Ignite](https://github.com/infinitered/ignite)
+  - [Expo](https://expo.dev/)
+  - [React Native](https://reactnative.dev/)
+- **Language**:
+  - [TypeScript](https://www.typescriptlang.org/)
+- **State Management**:
+  - [MobX State Tree](https://mobx-state-tree.js.org/intro/welcome)
+- **Animation**:
+  - [Reanimated](https://docs.swmansion.com/react-native-reanimated/)
+- **Styling**:
+  - Themed styles with dynamic light/dark mode. (uses [React Navigation](https://reactnavigation.org/))
+- **Internationalization**:
+  - [React-i18next](https://react.i18next.com/) (3 languages so far)
+- **Testing**:
+  - [Jest](https://jestjs.io/)
+  - [Testing Library](https://testing-library.com/docs/react-native-testing-library/intro/)
+- **Backend API**:
+  - [TheMealDB API](https://www.themealdb.com/api.php)
 
-- [2018 aka Bowser](https://github.com/infinitered/ignite-bowser)
-- [2017 aka Andross](https://github.com/infinitered/ignite-andross)
-- [2016 aka Ignite 1.0](https://github.com/infinitered/ignite-ir-boilerplate-2016)
+---
+
+## 🛠️ CI/CD
+
+The project uses **GitHub Actions** for automated builds and releases:
+
+- **Android Build**:
+  - Automatically creates and uploads an APK to the repository's release section when changes are pushed to the main branch.
+
+---
+
+## 🌐 Internationalization (i18n)
+
+The app supports three languages:
+
+- **English**
+- **Spanish**
+- **Portuguese**
+
+To add support for more languages, edit the localization files in the `i18n` directory.
+
+---
+
+## 📂 Directory Structure
+
+Here's an overview of the key project folders:
+
+- **app/**: Everything related to React Native components.
+- **ios/**: Everything related to native iOS project (e.g Project configuration, native dependencies).
+- **android/**: Everything related to Android project (e.g Project manifest, keystores).
+
+Inside app folder you will find the following key project folders
+
+- **app/components**: Reusable UI components.
+- **app/screens**: Screen components (e.g., WelcomeScreen, DishScreen).
+- **app/models**: MobX state models and stores.
+- **app/navigators**: Navigation objects determining mobile navigation.
+- **app/services**: API service integrations.
+- **app/utils**: Utility functions and hooks (e.g. orientation).
+- **app/i18n**: Translation sources and functions related to translating.
+- **app/theme**: Theme files
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1.  Fork the repository.
+2.  Create a new branch:
+    `git checkout -b feature/your-feature-name`
+3.  Make your changes and commit them:
+    `git commit -m "Add your message here"`
+4.  Push to the branch:
+    `git push origin feature/your-feature-name`
+5.  Open a pull request.

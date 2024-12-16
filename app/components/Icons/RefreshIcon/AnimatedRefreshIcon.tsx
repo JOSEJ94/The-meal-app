@@ -7,7 +7,7 @@ import Animated, {
   Easing,
   cancelAnimation,
 } from "react-native-reanimated"
-import RefreshIcon from "./RefreshIcon" // Replace with your actual SVG component
+import RefreshIcon from "./RefreshIcon.icon"
 import { useAppTheme } from "@/utils/useAppTheme"
 
 interface AnimatedRefreshIconProps {
@@ -36,7 +36,7 @@ export const AnimatedRefreshIcon = ({ loading }: AnimatedRefreshIconProps) => {
 
   return (
     <Animated.View style={animatedStyle}>
-      <RefreshIcon />
+      <RefreshIcon testID="RefreshIcon" />
     </Animated.View>
   )
 }

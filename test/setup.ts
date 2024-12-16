@@ -18,6 +18,18 @@ jest.doMock("react-native", () => {
           ) => success(100, 100),
         ),
       },
+      Dimensions: {
+        ...ReactNative.Dimensions,
+        get: jest.fn().mockImplementation((dim) => {
+          if (dim === "window") {
+            return {
+              width: 390, // Replace with the reference width (e.g., for iPhone 16 Pro)
+              height: 844, // Replace with the reference height (e.g., for iPhone 16 Pro)
+            }
+          }
+          return ReactNative.Dimensions.get(dim)
+        }),
+      },
     },
     ReactNative,
   )
@@ -48,6 +60,16 @@ jest.mock("../app/i18n/i18n.ts", () => ({
     numberToCurrency: jest.fn(),
   },
 }))
+
+export const mockTranslate = jest.fn().mockImplementation((key: string) => key)
+
+jest.mock("@/i18n", () => ({
+  translate: mockTranslate,
+}))
+
+jest.mock("react-native-keyboard-controller", () =>
+  require("react-native-keyboard-controller/jest"),
+)
 
 declare const tron // eslint-disable-line @typescript-eslint/no-unused-vars
 
