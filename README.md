@@ -1,5 +1,6 @@
 # The Meal App
 
+[![Unit Tests](https://github.com/JOSEJ94/The-meal-app/actions/workflows/test.yml/badge.svg)](https://github.com/JOSEJ94/The-meal-app/actions/workflows/test.yml)
 **The Meal App** is a React Native application designed to explore random recipes. Built using **Ignite**, **Expo**, and **TypeScript**, the app showcases a simple yet robust implementation of modern React Native practices, featuring:
 
 - **MobX State Tree** for state management.
