@@ -36,7 +36,7 @@ export const AnimatedRefreshIcon = ({ loading }: AnimatedRefreshIconProps) => {
 
   return (
     <Animated.View style={animatedStyle}>
-      <RefreshIcon />
+      <RefreshIcon testID="RefreshIcon" />
     </Animated.View>
   )
 }
