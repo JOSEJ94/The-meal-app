@@ -31,15 +31,16 @@ import { customFontsToLoad } from "./theme"
 import Config from "./config"
 import { KeyboardProvider } from "react-native-keyboard-controller"
 import { loadDateFnsLocale } from "./utils/formatDate"
-// export { default } from './.storybook';
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
 // Web linking configuration
-const prefix = Linking.createURL("http://localhost:8081")
+const prefix = Linking.createURL("/")
 const config = {
   screens: {
-    GetStarted: "getstarted",
+    GetStarted: {
+      path: "",
+    },
     DishDetails: "dishdetails",
   },
 }
@@ -116,3 +117,4 @@ function App(props: AppProps) {
 }
 
 export default App
+//export { default } from "../.storybook"

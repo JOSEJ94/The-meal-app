@@ -1,33 +1,34 @@
-import { View } from 'react-native';
-import type { Meta, StoryObj } from '@storybook/react';
-import { MyButton } from './Button';
+import { View } from "react-native"
+import type { Meta, StoryObj } from "@storybook/react"
+import { Button, ButtonVariant } from "../../../app/components/Button/Button"
 
 const meta = {
-  title: 'MyButton',
-  component: MyButton,
+  title: "Button",
+  component: Button,
   argTypes: {
-    onPress: { action: 'pressed the button' },
+    onPress: { action: "pressed the button" },
+    variant: {
+      options: [ButtonVariant.PRIMARY, ButtonVariant.SECONDARY],
+      control: { type: "radio" },
+    },
+    disabled: {
+      control: { type: "boolean" },
+    },
   },
   args: {
-    text: 'Hello world',
+    text: "Hello world",
   },
   decorators: [
     (Story) => (
-      <View style={{ padding: 16, alignItems: 'flex-start' }}>
+      <View style={{ paddingHorizontal: 10, alignItems: "center" }}>
         <Story />
       </View>
     ),
   ],
-} satisfies Meta<typeof MyButton>;
+} satisfies Meta<typeof Button>
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
-export const Basic: Story = {};
-
-export const AnotherExample: Story = {
-  args: {
-    text: 'Another example',
-  },
-};
+export const Basic: Story = {}
