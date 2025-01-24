@@ -91,3 +91,6 @@ web-build/
 
 # Yarn
 .yarn/*
+
+# Maestro
+.maestro/*/*.png
