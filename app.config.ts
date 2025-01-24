@@ -20,6 +20,7 @@ module.exports = ({ config }: ConfigContext): Partial<ExpoConfig> => {
     plugins: [
       ...existingPlugins,
       "expo-build-properties",
+      "expo-dev-client",
       require("./plugins/withSplashScreen").withSplashScreen,
     ],
   }
