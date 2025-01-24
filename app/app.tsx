@@ -31,14 +31,17 @@ import { customFontsToLoad } from "./theme"
 import Config from "./config"
 import { KeyboardProvider } from "react-native-keyboard-controller"
 import { loadDateFnsLocale } from "./utils/formatDate"
+import { useToggleStorybook } from "./utils/hooks/useStoryBookMenuOption"
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
 // Web linking configuration
-const prefix = Linking.createURL("http://localhost:8081")
+const prefix = Linking.createURL("/")
 const config = {
   screens: {
-    GetStarted: "getstarted",
+    GetStarted: {
+      path: "",
+    },
     DishDetails: "dishdetails",
   },
 }
@@ -59,15 +62,28 @@ function App(props: AppProps) {
     onNavigationStateChange,
     isRestored: isNavigationStateRestored,
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
+  const { isStorybookEnabled } = useToggleStorybook()
 
   const [areFontsLoaded, fontLoadError] = useFonts(customFontsToLoad)
   const [isI18nInitialized, setIsI18nInitialized] = useState(false)
+  const [StorybookUIRoot, setStorybookUIRoot] = useState<React.ComponentType | null>(null)
 
   useEffect(() => {
     initI18n()
       .then(() => setIsI18nInitialized(true))
       .then(() => loadDateFnsLocale())
   }, [])
+
+  useEffect(() => {
+    if (isStorybookEnabled) {
+      // @ts-expect-error
+      import("../.storybook")
+        .then(({ default: Storybook }) => setStorybookUIRoot(() => Storybook))
+        .catch((error) => console.error("Failed to load Storybook", error))
+    } else {
+      setStorybookUIRoot(null)
+    }
+  }, [isStorybookEnabled])
 
   const { rehydrated } = useInitialRootStore(() => {
     // This runs after the root store has been initialized and rehydrated.
@@ -78,6 +94,10 @@ function App(props: AppProps) {
     // Note: (vanilla iOS) You might notice the splash-screen logo change size. This happens in debug/development mode. Try building the app for release.
     setTimeout(hideSplashScreen, 500)
   })
+
+  if (isStorybookEnabled && StorybookUIRoot) {
+    return <StorybookUIRoot />
+  }
 
   // Before we show the app, we have to wait for our state to be ready.
   // In the meantime, don't render anything. This will be the background
@@ -115,3 +135,4 @@ function App(props: AppProps) {
 }
 
 export default App
+//export { default } from "../.storybook"

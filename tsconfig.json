@@ -28,6 +28,11 @@
       "module": "commonjs"
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "declarations.d.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "declarations.d.ts",
+    ".storybook/stories/Button/Button.stories.tsx"
+  ],
   "exclude": ["node_modules", "test/**/*"]
 }
