@@ -102,6 +102,7 @@ To run the unit tests, use the following command:
   - [Ignite](https://github.com/infinitered/ignite)
   - [Expo](https://expo.dev/)
   - [React Native](https://reactnative.dev/)
+  - [Storybooks](https://storybook.js.org/)
 - **Language**:
   - [TypeScript](https://www.typescriptlang.org/)
 - **State Management**:
@@ -123,7 +124,7 @@ To run the unit tests, use the following command:
 
 ## 🛠️ CI/CD
 
-The project uses **GitHub Actions** for automated builds and releases:
+The project uses **GitHub Actions** for automated builds and PR checks:
 
 - **Android Build**:
   - Automatically creates and uploads an APK to the repository's release section when changes are pushed to the main branch.
