@@ -1,0 +1,20 @@
+#flow: Get Started
+#intent:
+# See initial screen and be able to navigate to the random dish recipe screen
+
+appId: com.josedemo.mealapp
+---
+- clearState # clears the state of our app (navigation and authentication)
+- launchApp # launches the app
+- tapOn:
+    text: ".*http.*"
+- tapOn:
+    text: "Continue"
+- tapOn:
+    point: 100, 100
+- assertVisible: "Are you hungry?"
+- assertVisible: "GET ME A MEAL!"
+- tapOn:
+    text: "GET ME A MEAL!"
+- takeScreenshot: GetStarted/GetStartedFinalState
+- killApp

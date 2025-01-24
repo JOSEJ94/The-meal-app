@@ -1,0 +1,27 @@
+# #flow: Dish Detail
+#intent:
+# Be able to see multiple dishes without issues
+
+appId: com.josedemo.mealapp
+---
+- clearState # clears the state of our app (navigation and authentication)
+- launchApp # launches the app
+- tapOn:
+    text: ".*http.*"
+- tapOn:
+    text: "Continue"
+- tapOn:
+    point: 100, 100
+- assertVisible: "Are you hungry?"
+- assertVisible: "GET ME A MEAL!"
+- tapOn:
+    text: "GET ME A MEAL!"
+- assertVisible: "Ingredients"
+- assertVisible: "Instructions"
+- takeScreenshot: DishDetail/DishDetail1
+- tapOn:
+    id: "refreshDishBtn"
+- assertVisible: "Ingredients"
+- assertVisible: "Instructions"
+- takeScreenshot: DishDetail/DishDetail2
+- killApp

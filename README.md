@@ -115,6 +115,7 @@ To run the unit tests, use the following command:
 - **Testing**:
   - [Jest](https://jestjs.io/)
   - [Testing Library](https://testing-library.com/docs/react-native-testing-library/intro/)
+  - End to End testing with [Maestro](https://maestro.mobile.dev/)
 - **Backend API**:
   - [TheMealDB API](https://www.themealdb.com/api.php)
 
